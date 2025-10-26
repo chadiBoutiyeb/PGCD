@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int main() {
+    int a, b, reste;  
+
+    // Demander à l'utilisateur de saisir deux nbr
+    printf("Entrez le premier entier : ");
+    scanf("%d", &a);
+    printf("Entrez le deuxième entier : ");
+    scanf("%d", &b);
+
+    //  Vérifier que les deux nombres ne sont pas nuls
+    // (le PGCD n’est pas callculable pour 0 et 0)
+    if (a == 0 && b == 0) {
+        printf("Le PGCD ne peut pas etre calculer.\n");
+        return 0;  // Fin du programme
+    }
+
+    // Calcul du PGCD avec une boucle while
+    // On applique la div Euclidienne
+    // Tant que b n'est pas égal à 0, on calcule le a % b
+    while (b != 0) {
+        reste = a % b;  // Reste de la division entière
+        a = b;          //  a prend la valeur de b
+        b = reste;      //  b prend la valeur du reste
+    }
+    // Result: Quand b devient 0, la valeur de a est le PGCD
+    printf("Le PGCD est : %d\n", a);
+    return 0;  // Fin du programme
+}
