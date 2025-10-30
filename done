@@ -2,6 +2,7 @@
 
 int main() {
     int a, b, reste;  
+    int step = 1
 
     // Demander à l'utilisateur de saisir deux nbr
     printf("Entrez le premier entier : ");
@@ -21,10 +22,10 @@ int main() {
     // Tant que b n'est pas égal à 0, on calcule le a % b
     while (b != 0) {
         reste = a % b;  // Reste de la division entière
-         printf("Étape %d : %d = (%d × %d) + %d\n", step, a, a / b, b, reste);
+         printf("Étape %d : %d = (%d × %d) + %d\n", step, a, a / b, b, reste);  // les étapes de la div 
         a = b;          //  a prend la valeur de b
         b = reste;      //  b prend la valeur du reste
-       reste ++
+       step++;
 }
     // Result: Quand b devient 0, la valeur de a est le PGCD
     printf("Le PGCD est : %d\n", a);
