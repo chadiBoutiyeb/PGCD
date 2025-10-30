@@ -2,7 +2,7 @@
 
 int main() {
     int a, b, reste;  
-    int step = 1
+    int step = 1;
 
     // Demander à l'utilisateur de saisir deux nbr
     printf("Entrez le premier entier : ");
