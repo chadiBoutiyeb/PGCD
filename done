@@ -29,5 +29,7 @@ int main() {
 }
     // Result: Quand b devient 0, la valeur de a est le PGCD
     printf("Le PGCD est : %d\n", a);
+    if( a == 1 ) ;
+    printf("a et b sont premier entre eux");
     return 0;  // Fin du programme
 }
