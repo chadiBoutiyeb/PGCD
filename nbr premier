@@ -17,7 +17,7 @@ int main() {
     printf("Entrez un nombre inferieur a 100 : ");
     scanf("%d", &n);
 
-    if (n <= 1 || n >= 100) {
+    if (n <= 1 || n >= 1000) {
         printf("Veuillez entrer un nombre entre 2 et 99.\n");
         return 0;
     }
