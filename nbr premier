@@ -1,37 +1,60 @@
-	#include <stdio.h>
+#include <stdio.h>
+
+#define MAX 100000
 
 int estPremier(int x) {
-    if (x < 2) return 0; // 0 et 1 ne sont pas premiers
-
-    for (int i = 2; i*i <= x; i++) {
+    if (x < 2) return 0;
+    for (int i = 2; i <= x / 2; i++) {
         if (x % i == 0)
-            return 0; // Pas premier
+            return 0;
     }
-
-    return 1; // Premier
+    return 1;
 }
 
 int main() {
     int n;
 
-    printf("Entrez un nombre inferieur a 100 : ");
-    scanf("%d", &n);
+    // Demander un nombre positif <= MAX
+    do {
+        printf("Entrez un nombre positif (max %d) : ", MAX);
+        scanf("%d", &n);
+    } while (n < 1 || n > MAX);
 
-    if (n <= 1 || n >= 1000) {
-        printf("Veuillez entrer un nombre entre 2 et 99.\n");
-        return 0;
-    }
-    printf("Les nombres de 1 jusqu'a %d :\n", n);
-    for (int i = 1; i <= n; i++) {
-        printf("%d ", i);
-    }
+    int nombres[MAX];
+    int premiers[MAX];
+    int k = 0;
 
-    printf("\n\nLes nombres premiers entre 1 et %d :\n", n);
-    for (int i = 1; i <= n; i++) {
-        if (estPremier(i))
-            printf("%d ", i);
+ 
+    for (int i = 0; i < n; i++) {
+        nombres[i] = i + 1;
     }
 
-    printf("\n");
+    printf("\n=== TABLEAU DES NOMBRES DE 1 A %d  ===\n\n", n);
+
+    // Affichage des nombres en colonnes
+    for (int i = 0; i < n; i++) {
+        printf("%6d", nombres[i]);
+        if ((i + 1) % 5 == 0)
+            printf("\n");
+    }
+
+    // Remplissage du tableau des nombres premiers
+    for (int i = 0; i < n; i++) {
+        if (estPremier(nombres[i])) {
+            premiers[k] = nombres[i];
+            k++;
+        }
+    }
+
+    printf("\n\n=== NOMBRES PREMIERS JUSQU'A %d (5 colonnes) ===\n\n", n);
+
+    // Affichage des nombres premiers en colonnes
+    for (int i = 0; i < k; i++) {
+        printf("%6d", premiers[i]);
+        if ((i + 1) % 5 == 0)
+            printf("\n");
+    }
+
+    printf("\nTotal nombres premiers : %d\n", k);
     return 0;
 }
