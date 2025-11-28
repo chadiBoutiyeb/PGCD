@@ -1,0 +1,76 @@
+algorithme:
+           ENTRER n
+S ← 0
+C ← 0
+POUR i DE 1 A n FAIRE
+    ENTRER note
+    SI note < 0 OU note > 20 ALORS
+        afficher "note invalide" et re-demander
+    ENTRER coef
+    SI coef < 0 ALORS coef ← 0
+    S ← S + note * coef
+    C ← C + coef
+FIN POUR
+
+SI C = 0 ALORS
+    afficher "Erreur : somme des coefficients = 0"
+SINON
+    M ← S / C
+    afficher "Moyenne = " + M
+    SI M >= 10 ALORS
+        afficher "Statut : Validé"
+    SINON
+        afficher "Statut : Non validé"
+    FIN SI
+FIN SI
+ 
+
+
+
+
+
+code C :
+        #include <stdio.h>
+
+int main() {
+    int n, i;
+    float note, coef, S = 0, C = 0, M;
+    float seuil = 10.0;
+
+    printf("Entrez le nombre de matieres : ");
+    scanf("%d", &n);
+
+    for (i = 1; i <= n; i++) {
+        // Saisie de la note
+        do {
+            printf("Note de la matiere %d (0-20) : ", i);
+            scanf("%f", &note);
+        } while (note < 0 || note > 20);
+
+        // Saisie du coefficient
+        printf("Coefficient (defaut = 1) : ");
+        scanf("%f", &coef);
+
+        if (coef < 0)
+            coef = 0;
+
+        S += note * coef;
+        C += coef;
+    }
+
+    if (C == 0) {
+        printf("Erreur : somme des coefficients = 0.\n");
+        return 0;
+    }
+
+    M = S / C;
+
+    printf("\nMoyenne = %.2f / 20\n", M);
+
+    if (M >= seuil)
+        printf("Statut : Valide\n");
+    else
+        printf("Statut : Non valide\n");
+
+    return 0;
+}
