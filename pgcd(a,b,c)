@@ -1,0 +1,66 @@
+       le pgcd de a,b et c peut être calculé comme suit :
+
+M1:div euclidienne
+
+  pgcd(a,b) puis le pgcd(pgcd(a,b),c) on peut prendre un exemple :
+         EXEMPLE:
+    pgcd(24,36,10) 
+        on calcule PGCD(24, 36) en utilisant la div euclidienne:
+         36 = 24 × 1 + 12     (r1=12)
+         24 = 12 × 2 + 0      (r2=0)
+         PGCD(24, 36) = 12
+        puis on calcule PGCD(12, 10):
+         12 = 10 × 1 + 2       (r1=2)
+         10 = 2 × 5 + 0        (r2=0)
+         PGCD(12, 10) = 2
+        Donc pgcd(24,36,10)=2
+
+M2:factorisation 
+
+      La méthode de factorisation consiste à :
+        _décomposer chaque nombre en un produit de facteurs premiers
+        _repérer les facteurs communs à tous les nombres
+        _utiliser leurs plus petits exposants
+
+      L'idée est simple :
+        le PGCD est formé uniquement des facteurs premiers que A, B et C ont en commun
+     en prend le même exemple que pour M1:
+     EXEMPLE: pgcd(24,36,10)
+          24 = 2 × 2 × 2 × 3 = 2³ x 3
+          36 = 2 × 2 × 3 × 3 = 2² x 3²
+          10 = 2 × 5 = 2 x 5
+        2 est un facteur rn commun et le plus petit exposants de 2 est 1 
+       donc : pgcd(24,36,10)=2 
+
+ On peut aussi faire la méthode 1 dans un code c utilisant 2 fcts avec la premiere fct dans la deuxiemme:
+      code C:
+
+         #include <stdio.h>
+
+int pgcd(int a, int b) { // Fonction PGCD entre deux nombres avec l'algorithme d'Euclide
+
+    while (b != 0) {
+        int r = a % b;   // r = reste
+        a = b;           // a prend l'ancienne valeur de b
+        b = r;           // b devient le reste
+    }
+    return a;            // Quand b = 0, a contient le PGCD
+}
+
+int pgcd3(int a, int b, int c) {  // Fonction PGCD entre trois nombres
+    int ab = pgcd(a, b);
+    return pgcd(ab, c);
+}
+
+int main() {
+    int a, b, c;
+
+    printf("Entrez trois entiers : ");
+    scanf("%d %d %d", &a, &b, &c);
+
+    int resultat = pgcd3(a, b, c);
+
+    printf("Le PGCD de %d, %d et %d est : %d\n", a, b, c, resultat);
+
+    return 0;
+}
