@@ -1,1 +1,36 @@
-contenu du fichier 'magicien' (fourni par l'utilisateur)
+un magicien demande de faire ton mois de naissance x 12 + jour de naissance x 31 
+      EX: hamid est née le 14/09 alors
+        en utilisant J x 31 + M x 12
+           N = 31 x 14 + 12 x 9
+               N = 434 + 108
+                  N = 542
+le nbr qu'on va ecrire dans notre code ci dessous est 542 et il nous donnera 14/09
+       
+         CODE C :
+
+#include <stdio.h>
+
+int main() {
+    int N;
+    int compteur = 0;
+
+    printf("Entrez le nombre obtenu : ");
+    scanf("%d", &N);
+
+    for (int J = 1; J <= 31; J++) {
+        for (int M = 1; M <= 12; M++) {
+            if (31 * J + 12 * M == N) {
+                printf("Date possible : %d/%d\n", J, M);
+                compteur++;  // on compte cmb de fois on trouve une date diff
+            }
+        }
+    }
+
+    if (compteur == 0) {
+        printf("Aucune date ne correspond.\n");
+    } else {
+        printf("Nombre total de dates possibles : %d\n", compteur);
+    }
+
+    return 0;
+}
