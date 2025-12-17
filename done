@@ -1,1 +1,68 @@
-BlobSha: 3c4eba81479ec9703fde9b3856fa918046318c33
+#include <stdio.h>
+
+int main() {
+    int a, b, reste;  
+    int step = 1;
+    int a0, b0; // Sauvegarder les valeurs initiales pour le théorème de Bézout
+
+    // Demander à l'utilisateur de saisir deux nbr
+    printf("Entrez le premier entier : ");
+    scanf("%d", &a);
+    printf("Entrez le deuxième entier : ");
+    scanf("%d", &b);
+
+    a0 = a;
+    b0 = b;
+
+    //  Vérifier que les deux nombres ne sont pas nuls
+    // (le PGCD n’est pas callculable pour 0 et 0)
+    if (a == 0 && b == 0) {
+        printf("Le PGCD ne peut pas etre calculer.\n");
+        return 0;  // Fin du programme
+    }
+
+    // Calcul du PGCD avec une boucle while
+    // On applique la div Euclidienne
+    // Tant que b n'est pas égal à 0, on calcule le a % b
+    while (b != 0) {
+        reste = a % b;  // Reste de la division entière
+        printf("Étape %d : %d = (%d × %d) + %d\n", step, a, a / b, b, reste);  // les étapes de la div 
+        a = b;          //  a prend la valeur de b
+        b = reste;      //  b prend la valeur du reste
+        step++;
+    }
+
+    // Result: Quand b devient 0, la valeur de a est le PGCD
+    printf("Le PGCD est : %d\n", a);
+    if (a == 1)
+        printf("a et b sont premier entre eux\n");
+
+    // on veut trouver x et y tels que a0*x + b0*y = PGCD(a0, b0)(théorème de bézout)
+
+    int r1 = a0, r2 = b0;
+    int u1 = 1, u2 = 0;
+    int v1 = 0, v2 = 1;
+    int q, r, u, v;
+
+    // Tant que le reste n’est pas nul
+    while (r2 != 0) {
+        q = r1 / r2;          // quotient
+        r = r1 - q * r2;      // reste
+        u = u1 - q * u2;      // coefficient u
+        v = v1 - q * v2;      // coefficient v
+
+        // Mise à jour des variables 
+        r1 = r2;
+        r2 = r;
+        u1 = u2;
+        u2 = u;
+        v1 = v2;
+        v2 = v;
+    }
+
+    // À la fin : r1 = PGCD, et les coefficients de Bézout sont (u1, v1)
+    printf("Les coefficients de Bézout sont : x = %d et y = %d\n", u1, v1);
+    printf("Vérification : %d*(%d) + %d*(%d) = %d\n", a0, u1, b0, v1, r1);
+
+    return 0;  // Fin du programme
+}
